@@ -27,12 +27,16 @@ func (m *MemoryData) GetConf() (*MemoryData, error) {
 func (m *MemoryData) LinesToMap() error {
 	resp, err := http.Get(m.URL)
 	if err != nil {
+		log.Panicln("Could not get the Url. Error: ", err)
 		return err
 	}
 	defer resp.Body.Close()
 	m.RLock()
 	defer m.RUnlock()
 	m.Ips, err = m.linesFromReader(resp.Body)
+	if err != nil {
+		log.Panicln("There was a problem when processing a file. Error: ", err)
+	}
 	log.Println("Now we have ", m.Ips)
 	return err
 }
