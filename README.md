@@ -73,3 +73,12 @@ Example
 <code>
 curl http://localhost:3000/contains -d '{"ip_address": "1.1.1.1"}'
 </code>
+Refresh
+<code>
+curl --location --request POST 'http://localhost:3000/refresh' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "add": ["12.149.251.77", "11.149.251.77"],
+    "remove": ["11.149.251.77"]
+}'
+</code>
